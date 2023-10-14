@@ -7,8 +7,8 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 
 
 setup(
-    name="open_bobj",
-    version="0.1.0",
+    name="open-bobj",
+    version="0.1.1",
     description=("Open obj files in Blender from Terminal"),
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -30,7 +30,7 @@ setup(
     packages=find_packages(where="src"),
     include_package_data=True,
     python_requires=">=3.8, <4",
-    install_requires=["bpy"],
+    install_requires=[],
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"
     # syntax, for example:

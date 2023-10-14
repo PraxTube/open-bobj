@@ -1,6 +1,9 @@
 # Open BOBJ
 
-Simple Python Package to open `.obj` files in Blender.
+Simple Python Package to open `.obj` files in Blender
+from the command line.
+It clears the whole scene from any default objects and
+you are left with the `.obj` files you specified.
 
 ## Install
 

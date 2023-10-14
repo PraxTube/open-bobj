@@ -1,26 +1,32 @@
+import os
 import sys
-
-import bpy
-
-
-if len(sys.argv) < 5:
-    raise ValueError("Please provide the path to the OBJ file as an argument.")
+import subprocess
 
 
-# Remove the default cube, camera and light
-bpy.ops.object.select_all(action='DESELECT')
-bpy.ops.object.select_by_type(type='MESH')
-bpy.ops.object.delete()
-bpy.ops.object.select_by_type(type='LIGHT')
-bpy.ops.object.delete()
-bpy.ops.object.select_by_type(type='CAMERA')
-bpy.ops.object.delete()
+def run_blender_with_obj_files(obj_files):
+    if len(obj_files) == 0:
+        raise ValueError("No files are provided.")
+
+    # Path to Blender executable
+    blender_executable = "blender"
+
+    # Create the command to run Blender with the Python script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    blender_script = os.path.join(script_dir, "obj_import.py")
+    obj_files_as_str = ";".join(obj_files)
+    command = [blender_executable, "-P", blender_script, "--", obj_files_as_str]
+
+    # Run Blender with the script and OBJ files
+    subprocess.run(command)
 
 
-for i in range(4, len(sys.argv)):
-    obj_file_path = sys.argv[i]
+def main():
+    if len(sys.argv) < 2:
+        raise ValueError("No files are provided.")
 
-    # Import the OBJ file
-    bpy.ops.import_scene.obj(filepath=obj_file_path)
-    # Update the scene to reflect the changes
-    bpy.context.view_layer.update()
+    obj_files = sys.argv[1:]
+    run_blender_with_obj_files(obj_files)
+
+
+if __name__ == "__main__":
+    main()
